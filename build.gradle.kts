@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.phoenix"
-version = "0.2.1"
+version = "0.3.0"
 
 java {
     // The design document targets Java 17 for JIVE instrumentation. The
