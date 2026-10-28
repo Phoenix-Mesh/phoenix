@@ -1,6 +1,6 @@
 # Phoenix
 
-[![CI](https://github.com/Alverok/phoenix/actions/workflows/ci.yml/badge.svg)](https://github.com/Alverok/phoenix/actions/workflows/ci.yml)
+[![CI](https://github.com/Phoenix-Mesh/phoenix/actions/workflows/ci.yml/badge.svg)](https://github.com/Phoenix-Mesh/phoenix/actions/workflows/ci.yml)
 
 Phoenix is a lightweight middleware and orchestration system for heterogeneous, resource-constrained edge devices.
 

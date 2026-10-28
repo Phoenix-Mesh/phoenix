@@ -5,6 +5,8 @@ while the major version is 0, minor versions may change the node-agent protocol.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-28
+
 MQTT/TLS node-agent transport (#17: #18-#24). The HTTP transports are unchanged
 apart from sharing the device-to-node table.
 
@@ -114,5 +116,7 @@ semantics, transport-neutral attempt lifecycle, in-flight recovery when a node g
 `OFFLINE`, bounded recovery with a fresh waiting window, and attempt identity fencing
 negotiated per node (`attempt-id`).
 
-[0.2.1]: https://github.com/Alverok/phoenix/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/Alverok/phoenix/releases/tag/v0.2.0
+[Unreleased]: https://github.com/Phoenix-Mesh/phoenix/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/Phoenix-Mesh/phoenix/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/Phoenix-Mesh/phoenix/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/Phoenix-Mesh/phoenix/releases/tag/v0.2.0
