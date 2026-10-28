@@ -506,7 +506,9 @@ The transport is off unless `phoenix.mqtt.url` is set. Details:
 
 - Wire protocol and agent rules: [docs/mqtt-agent-protocol.md](docs/mqtt-agent-protocol.md)
 - Broker configuration, certificates and accounts: [deploy/mosquitto](deploy/mosquitto/README.md)
-- Reference Linux agent: [agents/python](agents/python/README.md)
+- Linux node agent (Java, MQTT/TLS and HTTP push): [phoenix-linux-agent](https://github.com/Phoenix-Mesh/phoenix-linux-agent)
+- Android node agent (MQTT/TLS and HTTP pull): [phoenix-android-agent](https://github.com/Phoenix-Mesh/phoenix-android-agent)
+- Reference Linux agent in Python: [agents/python](agents/python/README.md)
 
 ## Scheduling
 
@@ -568,7 +570,7 @@ The goal is to evaluate advanced scheduling against measured behavior rather tha
 | Android task execution                               | Working                       |
 | HTTP task polling                                    | Working                       |
 | Result return to Phoenix                             | Working                       |
-| Linux native/remote agent                            | MQTT reference agent (Python) |
+| Linux native/remote agent                            | Working (MQTT/TLS, HTTP push) |
 | Failure-aware task rescheduling                      | Working                       |
 | Delivery vs execution timeout semantics              | Working                       |
 | In-flight recovery on node OFFLINE                   | Working                       |
@@ -600,7 +602,15 @@ Broker configuration lives in [`deploy/mosquitto`](deploy/mosquitto/README.md) a
 reference MQTT agent in [`agents/python`](agents/python/README.md).
 Release history is in [`CHANGELOG.md`](CHANGELOG.md).
 
-The native Android Agent is maintained as a standalone Android Studio project with its own Gradle build.
+### Node agents
+
+Each agent lives in its own repository, with its own releases.
+
+| Agent             | Repository                                                                         | Transports                     |
+| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------ |
+| Android           | [phoenix-android-agent](https://github.com/Phoenix-Mesh/phoenix-android-agent)     | MQTT/TLS, HTTP pull            |
+| Linux             | [phoenix-linux-agent](https://github.com/Phoenix-Mesh/phoenix-linux-agent)         | MQTT/TLS, HTTP push            |
+| Linux (reference) | [`agents/python`](agents/python/README.md)                                         | MQTT/TLS                       |
 
 ## Running the Core
 
@@ -703,7 +713,7 @@ Request bodies on every endpoint are limited to 64 KiB (`413` above that).
 
 ## Running the Android Agent
 
-Open the standalone Phoenix Agent project in Android Studio.
+Clone [phoenix-android-agent](https://github.com/Phoenix-Mesh/phoenix-android-agent) and open it in Android Studio.
 
 Build:
 
@@ -728,6 +738,31 @@ In the Android app:
 5. Press `D` to dispatch a task.
 
 A successful run shows a real task executed on the Android device and a real result returned to Phoenix.
+
+## Running the Linux Agent
+
+Download `phoenix-linux-agent-v<version>.jar` from the
+[phoenix-linux-agent releases](https://github.com/Phoenix-Mesh/phoenix-linux-agent/releases/latest)
+and run it on the Linux machine (Java 11 or newer).
+
+Over MQTT/TLS (broker account and `ca.pem` from [deploy/mosquitto](deploy/mosquitto/README.md);
+the broker user name is the id printed by `--print-device-id`):
+
+```bash
+java -jar phoenix-linux-agent-v0.3.0.jar --broker <broker-host-or-ip> --ca ca.pem \
+    --password-file ~/.phoenix/broker-password \
+    --enrollment-token-file ~/.phoenix/enrollment-token
+```
+
+Over HTTP push (Core must reach the machine on the callback port):
+
+```bash
+java -jar phoenix-linux-agent-v0.3.0.jar http://192.0.2.10:8080 9090
+```
+
+The node appears in the console's **NODES** panel; press `D` to dispatch a task.
+Setup, troubleshooting and the validation runbook are in the agent's
+[docs](https://github.com/Phoenix-Mesh/phoenix-linux-agent/tree/main/docs).
 
 ## Design principles
 
@@ -767,4 +802,4 @@ execute real computation
 return real result
 ```
 
-The same model now also runs over a secure, message-oriented MQTT/TLS transport without changes to the orchestration abstractions. The next steps are validating it on the Android and Linux agents, ESP32 firmware, and the scheduling research below.
+The same model now also runs over a secure, message-oriented MQTT/TLS transport without changes to the orchestration abstractions, validated end to end with real Android and Linux agents. The next steps are ESP32 firmware and the scheduling research below.
