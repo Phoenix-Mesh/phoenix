@@ -5,8 +5,17 @@ while the major version is 0, minor versions may change the node-agent protocol.
 
 ## [Unreleased]
 
-MQTT/TLS node-agent transport (#17: #18-#22). The HTTP transports are unchanged
+MQTT/TLS node-agent transport (#17: #18-#24). The HTTP transports are unchanged
 apart from sharing the device-to-node table.
+
+### Validated
+
+- Android node agent over MQTT/TLS on two physical devices, a legacy tablet (Android 5.1)
+  and a current phone, with the real Core and broker (#23):
+  [phoenix-android-agent](https://github.com/Phoenix-Mesh/phoenix-android-agent).
+- Linux node agent over MQTT/TLS with the real Core and broker, alone and next to an
+  Android node (#24): [phoenix-linux-agent](https://github.com/Phoenix-Mesh/phoenix-linux-agent).
+  A device that registered over HTTP keeps its node identity when it moves to MQTT.
 
 ### Added
 
@@ -49,6 +58,8 @@ apart from sharing the device-to-node table.
   validation and conversion shared by the HTTP and MQTT gateways.
 - `TaskWire` and `JsonText` are public so every transport builds the same task body.
 - CI installs Mosquitto so the broker integration tests run.
+- README: node agents table linking the Android and Linux agent repositories, and
+  how to run the Linux agent; `agents/python` is the protocol reference.
 
 ## [0.2.1] - 2026-10-14
 

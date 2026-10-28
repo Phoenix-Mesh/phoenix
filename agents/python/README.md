@@ -36,7 +36,12 @@ python3 -m venv ~/.phoenix-agent/venv
 The broker account comes from `deploy/mosquitto/add-device.sh`, with the
 device id as the user name.
 
-## Validating a Linux node (issue #24)
+## Trying it out
+
+The Linux node agent that is released and validated (issue #24) is the Java
+agent in [phoenix-linux-agent](https://github.com/Phoenix-Mesh/phoenix-linux-agent);
+its `docs/mqtt-tls-validation.md` is the full runbook. This script stays the
+compact reference for the protocol. A quick check with it:
 
 1. Start Mosquitto and Core as in [`deploy/mosquitto`](../../deploy/mosquitto/README.md).
 2. Start the agent on the Linux machine. Core's event log shows
