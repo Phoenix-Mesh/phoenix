@@ -803,3 +803,8 @@ return real result
 ```
 
 The same model now also runs over a secure, message-oriented MQTT/TLS transport without changes to the orchestration abstractions, validated end to end with real Android and Linux agents. The next steps are ESP32 firmware and the scheduling research below.
+
+## License
+
+This project is licensed under the
+[Apache License, Version 2.0](LICENSE).

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.phoenix.model;
 
 import java.util.Set;

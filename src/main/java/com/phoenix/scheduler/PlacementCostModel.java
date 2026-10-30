@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.phoenix.scheduler;
 
 import com.phoenix.model.NodeRecord;

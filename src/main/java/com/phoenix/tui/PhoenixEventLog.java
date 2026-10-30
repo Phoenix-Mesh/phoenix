@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.phoenix.tui;
 
 import java.time.LocalTime;
