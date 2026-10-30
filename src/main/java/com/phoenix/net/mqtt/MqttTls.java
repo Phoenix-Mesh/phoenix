@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.phoenix.net.mqtt;
 
 import java.io.IOException;

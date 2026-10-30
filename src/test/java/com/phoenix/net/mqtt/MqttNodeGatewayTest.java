@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.phoenix.net.mqtt;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
