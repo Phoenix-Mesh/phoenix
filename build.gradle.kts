@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     implementation("com.google.inject:guice:7.0.0")
-    implementation("com.google.code.gson:gson:2.14.0")
+    implementation("com.google.code.gson:gson:2.15.0")
     implementation("com.googlecode.lanterna:lanterna:3.1.5")
     implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
     testImplementation(platform("org.junit:junit-bom:6.1.3"))
