@@ -38,6 +38,20 @@ jobs:
           sudo apt-get install -y -qq --no-install-recommends mosquitto
           sudo systemctl stop mosquitto || true
 
+      # Ubuntu's packaged Mosquitto is confined by AppArmor.
+      # The integration tests need it to read JUnit's temporary config files.
+      - name: Configure Mosquitto for integration tests
+        run: |
+          mkdir -p "$RUNNER_TEMP/phoenix-ci-bin"
+
+          cat > "$RUNNER_TEMP/phoenix-ci-bin/mosquitto" <<'EOF'
+          #!/usr/bin/env bash
+          exec /usr/bin/aa-exec -p unconfined -- /usr/sbin/mosquitto "$@"
+          EOF
+
+          chmod +x "$RUNNER_TEMP/phoenix-ci-bin/mosquitto"
+          echo "$RUNNER_TEMP/phoenix-ci-bin" >> "$GITHUB_PATH"
+
       - name: Build
         run: ./gradlew --no-daemon --console=plain clean build
 
